@@ -1,38 +1,119 @@
-.App {
-  text-align: center;
+@font-face {
+  font-family: 'Roboto';
+  src: url('fonts/Roboto/Roboto-Medium.ttf') format('truetype');
+  font-style: normal;
+  font-weight: normal;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+@font-face {
+font-family: 'Baskerville';
+src: url('fonts/Libre_Baskerville/LibreBaskerville-Regular.ttf') format('truetype');
+font-style: normal;
+font-weight: normal;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+:root{
+  --azure:#1797ff;
+  --brownish-grey: #606060;
 }
-
-.App-header {
-  background-color: #282c34;
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: Roboto;
+  font-size: 18px;
+}
+.contenido{
+  overflow-y: scroll;
+  overflow-x: hidden;
+  max-height: 100vh;
   min-height: 100vh;
+}
+
+.select-news{
+  display: block;
+  padding: 5px 12px 5px 12px;
+  border-radius: 4px;
+  border: solid 1px #2e2e2e;
+  background-color: #fff;
+  margin-top: 63px;
+  margin-bottom: 38px;
+}
+.cards{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2.2rem;
+}
+.card{
+  cursor: pointer;
+  display: inline-block;
+  width: 100%;
+  min-width: 337px;
+  min-height: 90px;
+  border-radius: 6px;
+  border: solid 1px #cdcdcd;
+  background-color: #fff;
+  display: grid;
+  grid-template-columns: auto 68px;
+  transition: all .2s ease-in-out;
+}
+.card:hover{
+  opacity: 0.5;
+}
+.bodyCard {
+  margin-left: 5%;
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  gap: .5rem;
+}
+.date{
+  display: flex;  
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #767676;
+}
+.date > img{
+  margin-right: 5px;
+}
+.date > span {
+  font-size: 11px;
+}
+.story_title{
+  font-size: 14px;
+  line-height: 1.43;
+  letter-spacing: 0.25px;
+  color: #6b6b6b;
+}
+.likeCard{
+  position: relative;
+  cursor: pointer;
+  border-radius: 0 6px 6px 0;
+  background-color: #f5f5f5;
+}
+.likeCard > img{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
 }
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+@media (min-width:1100px) {
+  .HACKER-NEWS{
+      position: initial;
+      transform: initial;
+      width: 1140px;
+      margin: auto;
+      padding-top: 44px;
   }
-  to {
-    transform: rotate(360deg);
+  main.content{
+      width: 1140px;
+  }
+  .select-news{
+      width: 240px;
+  }
+  .card{
+      max-width: 48%;
   }
 }
