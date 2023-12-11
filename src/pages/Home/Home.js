@@ -1,12 +1,13 @@
 import React from 'react'
-import NewsList from '../../components/NewsListComponent/NewsList.js'
+import Selector from '../../components/Selector/Selector'
+import NewsList from '../../components/NewsListComponent/NewsList'
 
 const Home = () => {
-  
   return (
-    <>
+    <main className='content'>
+      <Selector/>
       <NewsList/>
-    </>
+    </main>
   )
 }
 
