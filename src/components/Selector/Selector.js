@@ -1,21 +1,21 @@
 import React from 'react';
 
-const Selector = () => {
-  const option = ['Angular','React','Vuejs'];
+const Selector = ({setQuery}) => {
+  const option = ['Select your news','Angular','ReactJS','VueJS'];
 
   const search = (value) =>{
-    localStorage.setItem("query",option[value])
+    setQuery(option[value])
   }
   return (
     <>
-    <select className='select-news' id="news" defaultValue={0} onChange={e=>search(e.target.value)}>
-      <option key={0} value={0} disabled>Select your news</option>
-      {
-        option.map((value, index) => {
-          return <option key={index+1} value={index+1}>{value}</option>
-        })
-      }
-    </select>
+      <select className='select-news' id="news" defaultValue={0} onChange={e=>search(e.target.value)}>
+        {
+          option.map((value, index) => {
+            return index == 0 ? <option key={index} value={value} disabled>Select your news</option> :
+              <option key={index} value={index}>{value}</option>
+          })
+        }
+      </select>
     </>
     
   )
