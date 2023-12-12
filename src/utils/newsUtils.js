@@ -24,4 +24,25 @@ const timeElapsed = (timeCreate) =>{
   }
 }
 
-export {timeElapsed}
+const filterAndAddFavorites = (dataHits, favoritesList) => {
+  const posts = [];
+
+  dataHits.forEach(item => {
+    const myFavorite = favoritesList.find(e => e.objectID === item.objectID)?.fave || false;
+
+    if (item.author && item.created_at && item.story_title && item.story_url) {
+      posts.push({
+        author: item.author,
+        created_at: item.created_at,
+        story_title: item.story_title,
+        story_url: item.story_url,
+        objectID: item.objectID,
+        fave: myFavorite
+      });
+    }
+  });
+
+  return posts;
+}
+
+export {timeElapsed, filterAndAddFavorites}

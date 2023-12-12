@@ -106,19 +106,7 @@ main.content > ul {
   margin-top: 63px;
   margin-bottom: 38px;
 }
-.Text {
-  width: 11.438rem;
-  height: 1.375rem;
-  margin: 0 1.187rem 0 0;
-  font-family: Roboto;
-  font-size: 0.875rem;
-  font-weight: normal;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: 1.57;
-  letter-spacing: normal;
-  color: #343434;
-}
+
 .cards{
   display: flex;
   flex-wrap: wrap;
@@ -179,6 +167,97 @@ main.content > ul {
   top: 50%;
   left: 50%;
   transform: translateX(-50%) translateY(-50%);
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+.pagination ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.pagination li {
+  display: inline-block;
+}
+
+.page-normal{
+  font-size: 1rem;
+  font-weight: 400;
+  width: 2rem;
+  height: 2rem;
+  margin: 0 0.5rem 0 0;
+  padding: 0.563rem;
+  border-radius: 6px;
+  border: solid 1px #d9d9d9;
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.page-normal span{
+  font-family: Roboto;
+  font-size: 0.875rem;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.57;
+  letter-spacing: normal;
+  text-align: center;
+  color: rgba(0, 0, 0, 0.65);
+}
+
+.page-active span{
+  font-family: Roboto;
+  font-size: 0.875rem;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.57;
+  letter-spacing: normal;
+  text-align: center;
+  color: #ffffff;
+}
+
+.page-normal:hover,
+.page-normal:focus {
+  background-color: #f5f5f5;
+}
+
+.page-active:hover,
+.page-active:focus {
+  background-color: #1575ce;
+}
+
+.page-active {
+  font-size: 1rem;
+  font-weight: 400;
+  width: 2rem;
+  height: 2rem;
+  margin: 0 0.5rem 0 0;
+  border-radius: 6px;
+  border: solid 1px #d9d9d9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fffefe;
+  background-color: #1890ff;
+  border-color: #1890ff;
+}
+
+
+.pagination-item button.disabled {
+  color: #d9d9d9;
+  background-color: #f5f5f5;
+  border-color: #d9d9d9;
+  cursor: default;
 }
 
 @media (min-width:1100px) {
