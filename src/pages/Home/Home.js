@@ -2,12 +2,12 @@ import React, { useState } from 'react'
 import Selector from '../../components/Selector/Selector'
 import NewsList from '../../components/NewsListComponent/NewsList'
 
-const Home = ({setPage, setQuery, query,view}) => {
+const Home = ({setQuery, query, view, page}) => {
 
   return (
     <main className='content'>
       <Selector setQuery={setQuery}/>
-      <NewsList setQuery={setQuery} setPage={setPage} query={query} view={view}/>
+      <NewsList setQuery={setQuery} query={query} view={view} page={page}/>
     </main>
   )
 }

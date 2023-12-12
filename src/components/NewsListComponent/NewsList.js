@@ -1,59 +1,51 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import { getDataForPageAndQuery } from '../../utils/connectionUtils';
 import NewsCard from '../NewsCardComponent/NewsCard';
+import InfiniteScroll from 'react-infinite-scroll-component';
+import { filterAndAddFavorites } from '../../utils/newsUtils';
+import Pagination from '../Pagination/Pagination';
 
-
-const NewsList = ({query, view}) => {
-    
-  const [favsList, setFavsList] = useState([]);
-  localStorage.setItem("favsList",favsList);
-
+const NewsList = ({ query, view }) => {
   const [hits, setHits] = useState([]);
-  const option = ['angular','reactjs','vuejs'];
+  const [page, setPage] = useState(1);
+  const [totalPage, setTotalPage] = useState(2);
+  const option = ['angular', 'reactjs', 'vuejs'];
 
-  const getData = async () => {
+  const getData = async (page) => {
     const query = localStorage.getItem('query').toLocaleLowerCase();
-    const listFavs = JSON.parse(localStorage.getItem('favsList') || "[]" );
+    const listFavs = JSON.parse(localStorage.getItem('favsList') || "[]");
 
-    if (option.includes(query) && view == "All") {
-      const page = parseInt(localStorage.getItem('page'),10);
-      const data = await getDataForPageAndQuery({query: query,page: page});
-      const post = []
-      data.forEach(item =>{
-        const myFave = listFavs.find(e=>e.objectID == item.objectID)?.fave || false;
-        if (item.author && item.created_at && item.story_title && item.story_url) {
-          post.push({
-            author: item.author,
-            created_at: item.created_at,
-            story_title: item.story_title,
-            story_url: item.story_url,
-            objectID: item.objectID,
-            fave: myFave
-          });
-        }
-      })
+    if (option.includes(query) && view === "All" && page <= totalPage) {
+      const data = await getDataForPageAndQuery({ query: query, page: page });
+      const post = filterAndAddFavorites(data.hits, listFavs);
+      if (totalPage === 2) setTotalPage(data.nbPages);
       setHits(post);
     } 
-    if (view == "Favs") {
-      setHits(listFavs)
-      console.log(hits)
+    if (view === "Favs") {
+      setHits(listFavs);
     }
   }
-  useEffect(()=>{getData()},[query, view]);
+
+  useEffect(() => {
+    getData(page);
+  }, [query, view, page]);
 
   return (
     <>
-      <ul className='cards'>
-        {hits ? 
-          hits.map(item =>
-            <NewsCard item={item} setHits={setHits} favsList={favsList} setFavsList={setFavsList}/>
-          )
-        : 
-          <p>Cargando...</p>
-        }
-      </ul>
+      {hits ?
+        <>
+          <ul className='cards infinite-scroll-container'>
+            {hits.map((item, index) => (
+              <NewsCard key={index} item={item} setHits={setHits} />
+            ))}
+          </ul>
+          <Pagination page={page} setPage={setPage} totalPage={totalPage}/>
+        </>
+        : null
+      }
+
     </>
   )
 }
 
-export default NewsList
+export default NewsList;

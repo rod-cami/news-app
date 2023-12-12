@@ -4,7 +4,7 @@ import iconFavorite3 from '../../assets/icons/favorite/iconmonstr-favorite-3.png
 import iconTimer from '../../assets/icons/timer/iconmonstr-time-2.png';
 import { timeElapsed } from '../../utils/newsUtils';
 
-const NewsCard = ({item, setHits, favsList, setFavsList}) => {
+const NewsCard = ({item, setHits}) => {
   const openTab = () => window.open(item.story_url,'_blank');
 
   const handleFave = () =>{
@@ -15,13 +15,12 @@ const NewsCard = ({item, setHits, favsList, setFavsList}) => {
     const fave = JSON.parse(localStorage.getItem('favsList') || "[]" );
     if (item.fave) {
       const secondFavsList = fave.filter(e=>e.objectID !== item.objectID)
-      console.log(favsList)
-      setFavsList(JSON.stringify(secondFavsList))
+      localStorage.setItem('favsList',JSON.stringify(secondFavsList))
     } else {
       fave.push({...item,fave:true});
-      console.log(favsList)
-      setFavsList(JSON.stringify(fave))
+      localStorage.setItem('favsList',JSON.stringify(fave))
     }
+    
   }
 
   return (
