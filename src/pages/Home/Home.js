@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import Selector from '../../components/Selector/Selector'
 import NewsList from '../../components/NewsListComponent/NewsList'
 

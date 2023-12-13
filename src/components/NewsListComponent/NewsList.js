@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { getDataForPageAndQuery } from '../../utils/connectionUtils';
 import NewsCard from '../NewsCardComponent/NewsCard';
-import InfiniteScroll from 'react-infinite-scroll-component';
 import { filterAndAddFavorites } from '../../utils/newsUtils';
 import Pagination from '../Pagination/Pagination';
 
@@ -39,7 +38,7 @@ const NewsList = ({ query, view }) => {
               <NewsCard key={index} item={item} setHits={setHits} />
             ))}
           </ul>
-          <Pagination page={page} setPage={setPage} totalPage={totalPage}/>
+          {(query && view == "All") && <Pagination page={page} setPage={setPage} totalPage={totalPage}/>}
         </>
         : null
       }
