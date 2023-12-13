@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 
 const Menu = ({setView}) => {
   const view = localStorage.getItem('view');

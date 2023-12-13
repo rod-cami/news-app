@@ -89,6 +89,7 @@ main.content{
   flex-direction: column;
   justify-content: center;
   margin: auto;
+  margin-bottom: 3rem;
 }
 main.faves{
   margin-top: 133px;
