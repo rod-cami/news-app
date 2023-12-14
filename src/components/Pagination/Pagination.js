@@ -34,10 +34,9 @@ const Pagination = ({ page, setPage, totalPage }) => {
           disabled={page === 1 && startIndex === 0}
           className='page-normal'
         >
-          <span>A</span>
+          <span>{'<'}</span>
         </button>
       </div>
-
       <ul>
         {pagination.map((pageNumber) => (
           <li key={pageNumber} className="pagination-item">
@@ -51,14 +50,13 @@ const Pagination = ({ page, setPage, totalPage }) => {
           </li>
         ))}
       </ul>
-
       <div className="pagination-item">
         <button
           onClick={handlePaginationNext}
           disabled={page === totalPage}
           className='page-normal'
         >
-          <span>P</span>
+          <span>{'>'}</span>
         </button>
       </div>
     </div>
