@@ -10,35 +10,38 @@ const NewsList = ({ query, view }) => {
   const [totalPage, setTotalPage] = useState(2);
   const option = ['angular', 'reactjs', 'vuejs'];
 
-  const getData = async (page) => {
+  const updateHits = (data, listFavs) => {
+    const updatedHits = filterAndAddFavorites(data.hits, listFavs);
+    if (totalPage === 2) setTotalPage(data.nbPages);
+    setHits(updatedHits);
+  };
+  
+  const fetchData = async (page) => {
     const query = localStorage.getItem('query').toLocaleLowerCase();
     const listFavs = JSON.parse(localStorage.getItem('favsList') || "[]");
-
+  
     if (option.includes(query) && view === "All" && page <= totalPage) {
-      const data = await getDataForPageAndQuery({ query: query, page: page });
-      const post = filterAndAddFavorites(data.hits, listFavs);
-      if (totalPage === 2) setTotalPage(data.nbPages);
-      setHits(post);
-    } 
-    if (view === "Favs") {
+      const data = await getDataForPageAndQuery({ query, page });
+      updateHits(data, listFavs);
+    } else if (view === "Favs") {
       setHits(listFavs);
     }
-  }
+  };
 
   useEffect(() => {
-    getData(page);
+    fetchData(page);
   }, [query, view, page]);
 
   return (
     <>
       {hits ?
         <>
-          <ul className='cards infinite-scroll-container'>
+          <ul className='cards'>
             {hits.map((item, index) => (
               <NewsCard key={index} item={item} setHits={setHits} />
             ))}
           </ul>
-          {(query && view == "All") && <Pagination page={page} setPage={setPage} totalPage={totalPage}/>}
+          {query && view === "All" && <Pagination page={page} setPage={setPage} totalPage={totalPage}/>}
         </>
         : null
       }

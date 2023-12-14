@@ -2,7 +2,7 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import NewsCard from '../components/NewsCardComponent/NewsCard';
 
 describe('NewsCard component', ()=>{
-  test('Si muestra la información', () => {
+  test('Displays Information Correctly', () => {
     const mockItem = {
       objectID: '123',
       story_url: 'http://example.com',
@@ -18,8 +18,10 @@ describe('NewsCard component', ()=>{
   
     expect(screen.getByText(/John Doe/i)).toBeInTheDocument();
     expect(screen.getByText(/Example Story/i)).toBeInTheDocument();
+    expect(screen.getByAltText(/Not Favorited/i)).toBeInTheDocument();
   
-    fireEvent.click(screen.getByAltText(/No Fovorite/i));
+    fireEvent.click(screen.getByAltText(/Favorited/i));
     expect(setHitsMock).toHaveBeenCalled();
+
   });
 })

@@ -6,7 +6,6 @@ const getDataForPageAndQuery = async ({query,page}) => {
   const response_api = await getData(`${URL}?query=${query}&page=${page}`)
   if (response_api.status === 200) {
     const data = await response_api.json();
-    console.log(data)
     return data;
   } else{
     const error = await response_api.json();
