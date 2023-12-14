@@ -1,31 +1,37 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 
-const Pagination = ({page, setPage, totalPage}) => {
-  const miArray = Array.from({ length: 50 }, (_, index) => index + 1);
-  const [prev, setPrev] = useState(0);
-  const [next, setNext] = useState(9);
-  const [pagination, setPagination] = useState(miArray.slice(0,9))
-  const handlePageChange = (page) => {
-    setPage(page);
+const Pagination = ({ page, setPage, totalPage }) => {
+  const totalPages = 50;
+  const itemsPerPage = 9;
+  const miArray = Array.from({ length: totalPages }, (_, index) => index + 1);
+  const [startIndex, setStartIndex] = useState(0);
+  const [endIndex, setEndIndex] = useState(itemsPerPage - 1);
+  const [pagination, setPagination] = useState(miArray.slice(startIndex, endIndex + 1));
+
+  const updatePagination = (start, end) => {
+    setStartIndex(start);
+    setEndIndex(end);
+    setPagination(miArray.slice(start, end + 1));
   };
 
-  const handlePaginationPrev = () =>{
-    setPrev(prev-1)
-    setNext(next-1)
-    setPagination(miArray.slice(prev-1,next-1))
-  }
-  const handlePaginationNext = () =>{
-    setPrev(prev+1)
-    setNext(next+1)
-    setPagination(miArray.slice(prev+1,next+1))
-  }
+  const handlePageChange = (pageNumber) => {
+    setPage(pageNumber);
+  };
+
+  const handlePaginationPrev = () => {
+    updatePagination(startIndex-1,endIndex-1);
+  };
+
+  const handlePaginationNext = () => {
+    updatePagination(startIndex+1,endIndex+1);
+  };
 
   return (
     <div className='pagination'>
-      <div class="pagination-item">
+      <div className="pagination-item">
         <button
-          onClick={() => handlePaginationPrev()}
-          disabled={page == 1 && prev == 0}
+          onClick={handlePaginationPrev}
+          disabled={page === 1 && startIndex === 0}
           className='page-normal'
         >
           <span>A</span>
@@ -33,23 +39,23 @@ const Pagination = ({page, setPage, totalPage}) => {
       </div>
 
       <ul>
-        {pagination.map(i=> (
-          <li key={i} class="pagination-item">
+        {pagination.map((pageNumber) => (
+          <li key={pageNumber} className="pagination-item">
             <button
-              onClick={() => handlePageChange(i)}
-              disabled={page == i}
-              className={`${i == page ? 'page-active' : 'page-normal'}`}
+              onClick={() => handlePageChange(pageNumber)}
+              disabled={page === pageNumber}
+              className={`${page === pageNumber ? 'page-active' : 'page-normal'}`}
             >
-              <span>{i}</span>
+              <span>{pageNumber}</span>
             </button>
           </li>
         ))}
       </ul>
 
-      <div class="pagination-item">
+      <div className="pagination-item">
         <button
-          onClick={() => handlePaginationNext()}
-          disabled={page == totalPage}
+          onClick={handlePaginationNext}
+          disabled={page === totalPage}
           className='page-normal'
         >
           <span>P</span>
@@ -57,6 +63,6 @@ const Pagination = ({page, setPage, totalPage}) => {
       </div>
     </div>
   );
-}
+};
 
-export default Pagination
+export default Pagination;

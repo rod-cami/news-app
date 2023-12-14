@@ -4,21 +4,26 @@ import iconFavorite3 from '../../assets/icons/favorite/iconmonstr-favorite-3.png
 import iconTimer from '../../assets/icons/timer/iconmonstr-time-2.png';
 import { timeElapsed } from '../../utils/newsUtils';
 
-const NewsCard = ({item, setHits}) => {
+const NewsCard = ({ item, setHits }) => {
   const openTab = () => window.open(item.story_url,'_blank');
+
+  const updateLocalStorage = (faveList) => {
+    localStorage.setItem('favsList', JSON.stringify(faveList));
+  };
 
   const handleFave = () =>{
     setHits( e =>{
       return e.map(i => i.objectID === item.objectID ? {...i, fave: !i.fave} : i);
     })
     
-    const fave = JSON.parse(localStorage.getItem('favsList') || "[]" );
+    const faveList = JSON.parse(localStorage.getItem('favsList') || "[]");
+
     if (item.fave) {
-      const secondFavsList = fave.filter(e=>e.objectID !== item.objectID)
-      localStorage.setItem('favsList',JSON.stringify(secondFavsList))
+      const updatedFaveList = faveList.filter(e => e.objectID !== item.objectID);
+      updateLocalStorage(updatedFaveList);
     } else {
-      fave.push({...item,fave:true});
-      localStorage.setItem('favsList',JSON.stringify(fave))
+      faveList.push({ ...item, fave: true });
+      updateLocalStorage(faveList);
     }
     
   }
@@ -33,7 +38,7 @@ const NewsCard = ({item, setHits}) => {
         <div className='story_title'>{item.story_title}</div>				
       </div>
       <div className='likeCard' onClick={()=>handleFave()}>
-        <img src={item.fave ? iconFavorite3:  iconFavorite2} alt="No Fovorite" />
+        <img src={item.fave ? iconFavorite3:  iconFavorite2} alt={item.fave ? "Favorited" : "Not Favorited"} />
       </div>
     </li>
   )
