@@ -4,7 +4,7 @@
 
 This web application, built with React, provides a user-friendly interface for browsing posts from Hacker News. Users can filter posts based on the framework (React, Angular, Vuejs) and navigate through the results with pagination. The app supports persistent storage for selected filters and favorited posts, ensuring a seamless user experience.
 
-![Test Interface Snapshot]('./src/assets/icons/diseno_test.png' "Test Interface Snapshot")
+![Test Interface Snapshot](./src/assets/icons/diseno_test.png "Test Interface Snapshot")
 
 ## Installation
 
@@ -19,7 +19,11 @@ cd news-app
 ```bash
 npm install
 ```
-3. Start the development server:
+3. Set the Hacker News API URL as an environment variable:
+```bash
+npm install
+```
+4. Start the development server:
 ```bash
 npm start
 ```
@@ -57,6 +61,10 @@ When hovering over a row, the entire row and its children (texts, icons, like bu
 * HTML/CSS
 * Netlify (for deployment)
 * Hacker News API
+
+## Deployment
+
+The live version of the app can be accessed [here](https://test-news-app-cr.netlify.app/ "Link to deployed solution")
 
 ## Contributors
 
