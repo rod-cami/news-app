@@ -21,7 +21,7 @@ npm install
 ```
 3. Set the Hacker News API URL as an environment variable:
 ```bash
-npm install
+REACT_APP_API_URL=https://hn.algolia.com/api/v1/search_by_date
 ```
 4. Start the development server:
 ```bash
